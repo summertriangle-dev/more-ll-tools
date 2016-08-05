@@ -22,7 +22,7 @@ WHERE _encryption_release_id NOT NULL
 QUERY_TO_REPLACE_ENCRYPTED_COLUMNS = "UPDATE `{1}` SET {0} WHERE rowid = :__rowid"
 
 def decrypt_this(enc, keyid):
-    use = G_KEYBAG.get(str(keyid))["key"]
+    use = G_KEYBAG.get(str(keyid), {}).get("key")
     if use is None:
         raise RuntimeError("no key for keyid {0}".format(keyid))
 
